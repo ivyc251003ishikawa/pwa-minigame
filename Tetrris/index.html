@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris Game</title>
+    
+    <!-- PWA用の設定を追加 -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="icon-192.png">
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="game-container">
+        <div class="game-info">
+            <h1>TETRIS</h1>
+            <div class="score-box">
+                <h2>SCORE</h2>
+                <div id="score">0</div>
+            </div>
+            <div class="controls-info">
+                <h3>Controls</h3>
+                <p>← → : Move</p>
+                <p>Space : Rotate</p>
+                <p>↓ : Soft Drop</p>
+                <p>↑ : Hard Drop</p>
+            </div>
+            <button id="start-btn">START GAME</button>
+        </div>
+        <canvas id="tetris" width="240" height="400"></canvas>
+    </div>
+    <script src="index.js"></script>
+
+    <!-- Service Workerの登録処理を追加 -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then((reg) => console.log('SW registered!', reg))
+            .catch((err) => console.error('SW registration failed!', err));
+        });
+      }
+    </script>
+</body>
+
+</html>
